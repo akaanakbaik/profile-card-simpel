@@ -1,0 +1,532 @@
+:root {
+  --primary: #00CED1;
+  --secondary: #008B8B;
+  --accent: #FF6B6B;
+  --text: #2b2c48;
+  --light: #f8f9fa;
+  --blue-gradient: linear-gradient(135deg, #4169E1 0%, #1E90FF 50%, #87CEEB 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Jost", sans-serif;
+  background-image: url("https://telegra.ph/file/265949a2a89fc2adf5066.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--text);
+}
+
+.card {
+  width: 300px;
+  margin: auto;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.card[data-state="#about"] {
+  max-height: 600px;
+}
+
+.card[data-state="#contact"] {
+  height: 430px;
+}
+
+.card[data-state="#experience"],
+.card[data-state="#friends"] {
+  height: 550px;
+}
+
+.card-header {
+  position: relative;
+  display: flex;
+  height: 150px;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.card-cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  height: 160px;
+  top: -20%;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(30px);
+  transform: scale(1.2);
+}
+
+.card-avatar {
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-44px);
+}
+
+.card-fullname {
+  position: absolute;
+  bottom: 0;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateY(-10px) translateX(-50%);
+  left: 50%;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.card-jobtitle {
+  position: absolute;
+  bottom: 0;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.typing-text {
+  position: absolute;
+  bottom: -25px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  height: 20px;
+}
+
+.typing-text .text {
+  font-weight: 500;
+}
+
+.typing-text .cursor {
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.card-main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+}
+
+.card-section {
+  min-height: 200px;
+  display: none;
+  animation: fadeIn 0.6s both;
+}
+
+.card-section.is-active {
+  display: block;
+}
+
+.card-section#experience,
+.card-section#friends {
+  overflow-y: auto;
+  max-height: 350px;
+  position: relative;
+}
+
+.card-section#experience::after,
+.card-section#friends::after {
+  content: ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(to bottom, transparent 0%, var(--primary) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card-section#experience::-webkit-scrollbar,
+.card-section#friends::-webkit-scrollbar {
+  display: none;
+}
+
+.card-section#experience,
+.card-section#friends {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.profile-info {
+  margin: 15px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.profile-info p {
+  margin-bottom: 8px;
+}
+
+.profile-info span {
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.card-quote {
+  font-size: 16px;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--text);
+  margin: 15px 0;
+  text-align: center;
+  font-family: "DM Sans", sans-serif;
+}
+
+.card-subtitle {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.card-social {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.card-social a {
+  color: #000;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-right: 10px;
+}
+
+.card-social a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.card-timeline {
+  margin-top: 30px;
+  position: relative;
+}
+
+.card-timeline:after {
+  content: "";
+  left: 42px;
+  width: 0px;
+  top: 0;
+  height: 100%;
+  position: absolute;
+}
+
+.card-item {
+  position: relative;
+  padding-left: 70px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+  z-index: 1;
+  background: none;
+  border-radius: 0;
+  margin-bottom: 0px;
+  border-left: none;
+  transition: all 0.3s ease;
+}
+
+.card-item:hover {
+  background: none;
+  transform: none;
+}
+
+.card-item:last-child {
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
+.card-item:after {
+  content: attr(data-year);
+  position: absolute;
+  top: 0px;
+  left: 45px; /* Adjusted left position */
+  width: 12px;
+  height: 12px;
+  line-height: 0.6;
+  border: 2px solid #fff;
+  font-size: 11px;
+  text-indent: -35px;
+  border-radius: 50%;
+  color: #4169E1;
+  background: var(--blue-gradient);
+  box-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
+}
+
+.card-item-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #4169E1;
+  text-shadow: 0 1px 2px rgba(65, 105, 225, 0.1);
+}
+
+.card-item-desc {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  font-family: "DM Sans", sans-serif;
+}
+
+.card-contact-wrapper {
+  margin-top: 20px;
+}
+
+.card-contact {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-contact i {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: white;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.contact-me {
+  border: 0;
+  outline: none;
+  background: linear-gradient(to right, rgba(238, 130, 238) 0%, rgba(81, 106, 204, 0.8) 96%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  padding: 12px 16px;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: -5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Jost", sans-serif;
+  transition: 0.3s;
+}
+
+.contact-me:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-buttons {
+  display: flex;
+  background-color: #00FFFF;
+  margin-top: auto;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+}
+
+.card-buttons button {
+  flex: 1 1 auto;
+  user-select: none;
+  background: 0;
+  font-size: 13px;
+  border: 0;
+  padding: 15px 5px;
+  cursor: pointer;
+  color: var(--text);
+  transition: 0.3s;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  outline: 0;
+  border-bottom: 3px solid transparent;
+}
+
+.card-buttons button.is-active,
+.card-buttons button:hover {
+  color: var(--text);
+  border-bottom: 3px solid #8a84ff;
+  background: linear-gradient(to bottom, rgba(127, 199, 231, 0) 0%, rgba(100, 149, 237, 0.3) 44%, rgba(65, 105, 225, 0.3) 100%);
+}
+
+.music-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 206, 209, 0.9);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+#snowflake-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translatey(40px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px;
+    align-items: center;
+    padding-top: 20px;
+  }
+  
+  .card {
+    width: 300px;
+    max-width: 300px;
+    border-radius: 15px !important;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+  
+  .card-header {
+    height: 140px;
+  }
+  
+  .card-avatar {
+    width: 80px;
+    height: 80px;
+    transform: translateX(-50%) translateY(-35px);
+  }
+  
+  .card-fullname {
+    font-size: 18px;
+    transform: translateY(-5px) translateX(-50%);
+  }
+  
+  .card-jobtitle {
+    font-size: 12px;
+  }
+  
+  .typing-text {
+    font-size: 12px;
+    bottom: -20px;
+  }
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .profile-info {
+    font-size: 13px;
+  }
+  
+  .card-quote {
+    font-size: 14px;
+  }
+  
+  .card-social a {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .card-buttons button {
+    font-size: 11px;
+    padding: 10px 3px;
+  }
+  
+  .card-item {
+    padding-left: 60px;
+    padding-right: 15px;
+  }
+  
+  .card-timeline:after {
+    left: 35px;
+  }
+  
+  .card-item:after {
+    left: 30px;
+  }
+  
+  .music-button {
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .footer {
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+
