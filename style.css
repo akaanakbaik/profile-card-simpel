@@ -250,13 +250,15 @@ body {
   position: relative;
 }
 
-.card-timeline:after {
+.card-timeline:before {
   content: "";
-  left: 42px;
-  width: 0px;
+  position: absolute;
+  left: 48px;
   top: 0;
   height: 100%;
-  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, #4169E1 0%, #1E90FF 80%, transparent 100%);
+  z-index: 0;
 }
 
 .card-item {
@@ -286,7 +288,7 @@ body {
   content: attr(data-year);
   position: absolute;
   top: 0px;
-  left: 45px; /* Adjusted left position */
+  left: 45px;
   width: 12px;
   height: 12px;
   line-height: 0.6;
@@ -507,12 +509,12 @@ body {
     padding-right: 15px;
   }
   
-  .card-timeline:after {
-    left: 35px;
+  .card-timeline:before {
+    left: 38px;
   }
   
   .card-item:after {
-    left: 30px;
+    left: 35px;
   }
   
   .music-button {
@@ -530,3 +532,6 @@ body {
 }
 
 
+
+
+  
