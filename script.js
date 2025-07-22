@@ -7,19 +7,26 @@ document.addEventListener("DOMContentLoaded", function() {
   let isAnimating = false;
 
   const profileData = {
-    name: "Aka",
+    name: "It's Me Aka",
     tagline: "ini sebenarnya buat apa ya?",
+    avatar: "https://files.catbox.moe/qfamnx.jpg",
+    cover: "https://i.ibb.co/8d33grw/tumblr-ppaq0f-Dy-B41ugxywdo1-1280.jpg",
     age: "15 tahun",
     origin: "Sumatra Barat",
     school: "MTsN 2 Pasaman Barat",
     quotes: "Hanya seorang manusia biasa yang mengharapkan kehangatan tulus dari seseorang.",
     roles: ["Pelajar", "Developer", "Pemula", "hehehe 🗿"],
+    social: [
+      { icon: "fab fa-whatsapp", link: "https://wa.me/6281266950382" },
+      { icon: "fab fa-instagram", link: "https://instagram.com/kenal.aka" },
+      { icon: "fab fa-github", link: "https://github.com/akaanakbaik" }
+    ],
     journey: [
-      { year: "2022", description: "Menemukan Hobi Baru\nMulai menjelajahi dunia JB dan Hosting" },
-      { year: "2023", description: "Fokus di JB & Hosting\nMeskipun JB kecil-kecilan dan jualan panel" },
-      { year: "2024", description: "era jb dan awal developer\nnama jb ku mulai tinggi tetapi karena ingin fokus sekolah saya istirahat jb dan belajar pemograman javascript sebagai awal dan kembangkan bot wa" },
-      { year: "2025", description: "Fokus ke pemograman kecil\nkembangkan bot wa dan dalami ngoding website, belajar secara otodidak" },
-      { year: "2026", description: "asah pemograman dan fokus sekolah\nterus mengembangkan bot wa, buat projek web kecil dan lebih fokus sekolah" }
+      { year: "2022", title: "Menemukan Hobi Baru", description: "Mulai menjelajahi dunia JB dan Hosting" },
+      { year: "2023", title: "Fokus di JB & Hosting", description: "Meskipun JB kecil-kecilan dan jualan panel" },
+      { year: "2024", title: "era jb dan awal developer", description: "nama jb ku mulai tinggi tetapi karena ingin fokus sekolah saya istirahat jb dan belajar pemograman javascript sebagai awal dan kembangkan bot wa" },
+      { year: "2025", title: "Fokus ke pemograman kecil", description: "kembangkan bot wa dan dalami ngoding website, belajar secara otodidak" },
+      { year: "2026", title: "asah pemograman dan fokus sekolah", description: "terus mengembangkan bot wa, buat projek web kecil dan lebih fokus sekolah" }
     ],
     friends: [
       { name: "Habibi", description: "teman rl terbaik" },
@@ -29,10 +36,11 @@ document.addEventListener("DOMContentLoaded", function() {
       { name: "raol", description: "teman online, kang open source code" }
     ],
     contact: {
-      location: "Sumatera Barat, Indonesia",
+      location: "Sumatra Barat, Indonesia",
       phone: "+6281266950382",
       email: "furinabyaka@gmail.com"
-    }
+    },
+    music: "https://files.catbox.moe/2itqw3.mp3"
   };
 
   const switchSection = (targetSectionId) => {
@@ -73,14 +81,19 @@ document.addEventListener("DOMContentLoaded", function() {
     currentSection.classList.add("is-active");
   }
 
-  const typingText = document.querySelector(".typing-text .text");
-  if (typingText) {
+  document.querySelector(".card-cover").style.backgroundImage = `url('${profileData.cover}')`;
+  document.querySelector(".card-avatar").src = profileData.avatar;
+  document.querySelector(".card-fullname").textContent = profileData.name;
+  document.querySelector(".card-jobtitle").textContent = profileData.tagline;
+
+  const typingTextElement = document.querySelector(".typing-text .text");
+  if (typingTextElement) {
     const roles = profileData.roles;
     let i = 0, j = 0, isDeleting = false;
 
     const typeEffect = () => {
       const current = roles[i];
-      typingText.textContent = isDeleting 
+      typingTextElement.textContent = isDeleting 
         ? current.substring(0, j - 1) 
         : current.substring(0, j + 1);
 
@@ -100,10 +113,89 @@ document.addEventListener("DOMContentLoaded", function() {
     typeEffect();
   }
 
+  const aboutSection = document.getElementById("about");
+  if (aboutSection) {
+    aboutSection.querySelector(".profile-info").innerHTML = `
+      <p><span>Umur:</span> ${profileData.age}</p>
+      <p><span>Asal:</span> ${profileData.origin}</p>
+      <p><span>Sekolah:</span> ${profileData.school}</p>
+    `;
+    aboutSection.querySelector(".card-quote").textContent = `qoutes: ${profileData.quotes}"`;
+
+    const socialLinksContainer = aboutSection.querySelector(".card-social");
+    socialLinksContainer.innerHTML = "";
+    profileData.social.forEach(social => {
+      const a = document.createElement("a");
+      a.href = social.link;
+      a.target = "_blank";
+      a.innerHTML = `<i class="${social.icon}"></i>`;
+      socialLinksContainer.appendChild(a);
+    });
+  }
+
+  const experienceSection = document.getElementById("experience");
+  if (experienceSection) {
+    experienceSection.querySelector(".card-subtitle").textContent = "Perjalanan Saya";
+    const timelineDiv = experienceSection.querySelector(".card-timeline");
+    timelineDiv.innerHTML = "";
+    profileData.journey.forEach((item) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "card-item";
+      itemDiv.setAttribute("data-year", item.year);
+      itemDiv.innerHTML = `
+        <div class="card-item-title">${item.title}</div>
+        <div class="card-item-desc">${item.description}</div>
+      `;
+      timelineDiv.appendChild(itemDiv);
+    });
+  }
+
+  const friendsSection = document.getElementById("friends");
+  if (friendsSection) {
+    friendsSection.querySelector(".card-subtitle").textContent = "teman Saya";
+    const timelineDiv = friendsSection.querySelector(".card-timeline");
+    timelineDiv.innerHTML = "";
+    profileData.friends.forEach((item, index) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "card-item";
+      itemDiv.setAttribute("data-year", index + 1);
+      itemDiv.innerHTML = `
+        <div class="card-item-title">${item.name}</div>
+        <div class="card-item-desc">${item.description}</div>
+      `;
+      timelineDiv.appendChild(itemDiv);
+    });
+  }
+
+  const contactSection = document.getElementById("contact");
+  if (contactSection) {
+    contactSection.querySelector(".card-subtitle").textContent = "Hubungi Saya";
+    contactSection.querySelector(".card-contact-wrapper").innerHTML = `
+      <div class="card-contact">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>${profileData.contact.location}</span>
+      </div>
+      <div class="card-contact">
+        <i class="fas fa-phone-alt"></i>
+        <span>${profileData.contact.phone}</span>
+      </div>
+      <div class="card-contact">
+        <i class="fas fa-envelope"></i>
+        <span>${profileData.contact.email}</span>
+      </div>
+      <a href="https://wa.me/${profileData.contact.phone.replace("+", "")}" target="_blank">
+        <button class="contact-me">hubungi saya</button>
+      </a>
+    `;
+  }
+
+  document.querySelector(".footer p").innerHTML = `&copy; ${new Date().getFullYear()} Aka . Dibuat dengan ❤️ & code`;
+
   const musicBtn = document.getElementById("musicBtn");
   const backgroundMusic = document.getElementById("backgroundMusic");
 
   if (musicBtn && backgroundMusic) {
+    backgroundMusic.src = profileData.music;
     backgroundMusic.volume = 0.3;
 
     const updateMusicButton = () => {
@@ -192,41 +284,4 @@ document.addEventListener("DOMContentLoaded", function() {
       observer.observe(card, { attributes: true, attributeFilter: ["data-state"] });
     });
   }
-
-  const experienceSection = document.getElementById("experience");
-  const friendsSection = document.getElementById("friends");
-
-  if (experienceSection) {
-    const timelineDiv = experienceSection.querySelector(".card-timeline");
-    timelineDiv.innerHTML = '';
-    profileData.journey.forEach((item) => {
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "card-item";
-      itemDiv.setAttribute("data-year", item.year);
-      itemDiv.innerHTML = `
-        <div class="card-item-title">${item.description.split('\n')[0]}</div>
-        <div class="card-item-desc">${item.description.split('\n').slice(1).join('<br>')}</div>
-      `;
-      timelineDiv.appendChild(itemDiv);
-    });
-  }
-
-  if (friendsSection) {
-    const timelineDiv = friendsSection.querySelector(".card-timeline");
-    timelineDiv.innerHTML = '';
-    profileData.friends.forEach((item, index) => {
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "card-item";
-      itemDiv.setAttribute("data-year", index + 1);
-      itemDiv.innerHTML = `
-        <div class="card-item-title">${item.name}</div>
-        <div class="card-item-desc">${item.description}</div>
-      `;
-      timelineDiv.appendChild(itemDiv);
-    });
-  }
-
 });
-
-
-        
