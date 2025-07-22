@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
       { year: "2023", title: "Fokus di JB & Hosting", description: "Meskipun JB kecil-kecilan dan jualan panel" },
       { year: "2024", title: "era jb dan awal developer", description: "nama jb ku mulai tinggi tetapi karena ingin fokus sekolah saya istirahat jb dan belajar pemograman javascript sebagai awal dan kembangkan bot wa" },
       { year: "2025", title: "Fokus ke pemograman kecil", description: "kembangkan bot wa dan dalami ngoding website, belajar secara otodidak" },
-      { year: "2026", title: "asah pemograman dan fokus sekolah", description: "terus mengembangkan bot wa, buat projek web kecil dan lebih fokus sekolah" }
     ],
     friends: [
       { name: "Habibi", description: "teman rl terbaik" },
